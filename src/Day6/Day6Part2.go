@@ -19,19 +19,6 @@ func main() {
 	// x,y grid and whether their brightness.
 	lightGrid := map[int]map[int]int{}
 
-	// Loop through x positions.
-	for i := 0; i <= 999; i++ {
-
-		if lightGrid[i] == nil {
-			lightGrid[i] = map[int]int{}
-		}
-
-		// Loop through y positions.
-		for i2 := 0; i2 <= 999; i2++ {
-			lightGrid[i][i2] = 0
-		}
-	}
-
 	// We use a scanner to loop through every line.
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -49,11 +36,16 @@ func main() {
 
 			xStart, yStart, xEnd, yEnd := getStartAndEndCoords(start, end)
 
-			instructionLightGrid := getLightsInGrid(xStart, yStart, xEnd, yEnd)
+			// Loop through x positions.
+			for x := xStart; x <= xEnd; x++ {
 
-			for x, ymap := range instructionLightGrid {
-				// Add  2 to the brightness for toggles.
-				for y, _ := range ymap {
+				// Ensure map.
+				if lightGrid[x] == nil {
+					lightGrid[x] = map[int]int{}
+				}
+
+				// Loop through y positions.
+				for y := yStart; y <= yEnd; y++ {
 					lightGrid[x][y] += 2
 				}
 			}
@@ -64,22 +56,27 @@ func main() {
 
 			xStart, yStart, xEnd, yEnd := getStartAndEndCoords(start, end)
 
-			instructionLightGrid := getLightsInGrid(xStart, yStart, xEnd, yEnd)
-
 			// Turn brightness up or down.
 			brightnessUp := false
 			if words[1] == "on" {
 				brightnessUp = true
 			}
 
-			for x, ymap := range instructionLightGrid {
-				for y, _ := range ymap {
+			// Loop through x positions.
+			for x := xStart; x <= xEnd; x++ {
+
+				// Ensure map.
+				if lightGrid[x] == nil {
+					lightGrid[x] = map[int]int{}
+				}
+
+				// Loop through y positions.
+				for y := yStart; y <= yEnd; y++ {
 					if brightnessUp {
 						lightGrid[x][y]++
 					} else {
-						lightGrid[x][y]--
-						if lightGrid[x][y] < 0 {
-							lightGrid[x][y] = 0
+						if lightGrid[x][y] > 0 {
+							lightGrid[x][y]--
 						}
 					}
 				}
@@ -106,24 +103,4 @@ func getStartAndEndCoords(start []string, end []string) (int, int, int, int) {
 	xEnd, _ := strconv.Atoi(end[0])
 	yEnd, _ := strconv.Atoi(end[1])
 	return xStart, yStart, xEnd, yEnd
-}
-
-func getLightsInGrid(xStart int, yStart int, xEnd int, yEnd int) map[int]map[int]bool {
-
-	lightGrid := map[int]map[int]bool{}
-
-	// Loop through x positions.
-	for i := xStart; i <= xEnd; i++ {
-
-		if lightGrid[i] == nil {
-			lightGrid[i] = map[int]bool{}
-		}
-
-		// Loop through y positions.
-		for i2 := yStart; i2 <= yEnd; i2++ {
-			lightGrid[i][i2] = true
-		}
-	}
-
-	return lightGrid
 }
