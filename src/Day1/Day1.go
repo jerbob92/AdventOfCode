@@ -14,8 +14,11 @@ func main() {
 	// We start at floor 0
 	currentFloor := 0
 
-	// Loop through every character, we don't need the index.
-	for _, char := range input {
+	// We start at 0 so we can recognize if we already have been to the basement.
+	// The position is always > 0 when we have been to the basement.
+	firstBasementPosition := 0
+
+	for position, char := range input {
 		// Char 40 == (
 		// Char 41 == )
 		// ( == Up
@@ -25,7 +28,14 @@ func main() {
 		} else {
 			currentFloor--
 		}
+
+		if firstBasementPosition == 0 && currentFloor == -1 {
+
+			// We add one, we have a zero-indexed number, while we need to provide a one-indexed number.
+			firstBasementPosition = (position + 1)
+		}
 	}
 
-	log.Printf("Current floor: %d", currentFloor)
+	log.Printf("Part 1: Current floor: %d", currentFloor)
+	log.Printf("Part 2: Position of the character that took us to the basement floor: %d", firstBasementPosition)
 }
