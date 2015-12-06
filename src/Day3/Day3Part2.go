@@ -1,7 +1,8 @@
 package main
+
 import (
-	"log"
 	"io/ioutil"
+	"log"
 )
 
 func main() {
@@ -26,11 +27,11 @@ func main() {
 	housesGrid[xIndexSanta] = map[int]int{}
 
 	// Both robot and normal santa start at the 0,0, they get 2 presents.
-	housesGrid[xIndexSanta][yIndexSanta]++;
-	housesGrid[xIndexRobot][yIndexRobot]++;
+	housesGrid[xIndexSanta][yIndexSanta]++
+	housesGrid[xIndexRobot][yIndexRobot]++
 
 	// But it's still one house.
-	amountOfHouses++;
+	amountOfHouses++
 
 	// False = Normal Santa, True = Robot Santa.
 	stepTurnRobotSanta := false
@@ -41,65 +42,65 @@ func main() {
 		// Char 60 == <
 		// Char 62 == >
 
-		if (stepTurnRobotSanta) {
-			switch(char) {
+		if stepTurnRobotSanta {
+			switch char {
 			case 94:
 				yIndexRobot++
-				break;
+				break
 			case 118:
 				yIndexRobot--
-				break;
+				break
 			case 60:
 				xIndexRobot--
-				break;
+				break
 			case 62:
 				xIndexRobot++
-				break;
+				break
 			}
 
 			// If x doesn't exist yet, create a new map.
-			if (housesGrid[xIndexRobot] == nil) {
+			if housesGrid[xIndexRobot] == nil {
 				housesGrid[xIndexRobot] = map[int]int{}
 			}
 
 			// If y doesn't exist yet, we found a new house.
-			if (housesGrid[xIndexRobot][yIndexRobot] == 0) {
-				amountOfHouses++;
+			if housesGrid[xIndexRobot][yIndexRobot] == 0 {
+				amountOfHouses++
 			}
 
 			// Deliver a package at the current house
-			housesGrid[xIndexRobot][yIndexRobot]++;
+			housesGrid[xIndexRobot][yIndexRobot]++
 
 			// Let normal santa walk again.
 			stepTurnRobotSanta = false
 		} else {
-			switch(char) {
+			switch char {
 			case 94:
 				yIndexSanta++
-				break;
+				break
 			case 118:
 				yIndexSanta--
-				break;
+				break
 			case 60:
 				xIndexSanta--
-				break;
+				break
 			case 62:
 				xIndexSanta++
-				break;
+				break
 			}
 
 			// If x doesn't exist yet, create a new map.
-			if (housesGrid[xIndexSanta] == nil) {
+			if housesGrid[xIndexSanta] == nil {
 				housesGrid[xIndexSanta] = map[int]int{}
 			}
 
 			// If y doesn't exist yet, we found a new house.
-			if (housesGrid[xIndexSanta][yIndexSanta] == 0) {
-				amountOfHouses++;
+			if housesGrid[xIndexSanta][yIndexSanta] == 0 {
+				amountOfHouses++
 			}
 
 			// Deliver a package at the current house
-			housesGrid[xIndexSanta][yIndexSanta]++;
+			housesGrid[xIndexSanta][yIndexSanta]++
 
 			// Let robot santa walk again.
 			stepTurnRobotSanta = true

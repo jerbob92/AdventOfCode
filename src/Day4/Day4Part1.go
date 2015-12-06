@@ -1,10 +1,11 @@
 package main
+
 import (
 	"crypto/md5"
-	"log"
-	"strings"
 	"encoding/hex"
+	"log"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -20,14 +21,14 @@ func main() {
 		hasher.Reset()
 
 		// Try the next number.
-		lowestNumber++;
+		lowestNumber++
 
 		// Generate the hash for the next number.
 		hasher.Write([]byte(input + strconv.Itoa(lowestNumber)))
 		resultHash = hex.EncodeToString(hasher.Sum(nil))
 	}
 
-	if (lowestNumber > -1) {
+	if lowestNumber > -1 {
 		log.Printf("The lowest number that results in a hash that starts with %s with key %s + i is where i = %d", prefix, input, lowestNumber)
 	}
 }

@@ -1,8 +1,9 @@
 package main
+
 import (
-	"os"
 	"bufio"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -22,9 +23,8 @@ func main() {
 		// Get the text of the current line.
 		line := scanner.Text()
 
-
 		// First filter out the bad strings.
-		if (strings.Contains(line, "ab") || strings.Contains(line, "cd") || strings.Contains(line, "pq") || strings.Contains(line, "xy")) {
+		if strings.Contains(line, "ab") || strings.Contains(line, "cd") || strings.Contains(line, "pq") || strings.Contains(line, "xy") {
 			continue
 		}
 
@@ -32,7 +32,7 @@ func main() {
 		hasRepeatingCharacter := false
 
 		lastChar := ""
-		vowelsFound := 0;
+		vowelsFound := 0
 		for _, char := range line {
 
 			// Save this character so we can match it in the next loop.
@@ -55,7 +55,7 @@ func main() {
 
 		// If we didn't have enough vowels, skip this line.
 		if vowelsFound < 3 {
-			continue;
+			continue
 		}
 
 		// We got through al the requirements, this is a nice string.

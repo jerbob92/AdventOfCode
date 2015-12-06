@@ -1,10 +1,11 @@
 package main
+
 import (
-	"os"
 	"bufio"
 	"log"
-	"strings"
+	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -56,9 +57,9 @@ func main() {
 
 		// Add the sheets to the needed wrapping paper.
 		// We need 2 of every sheet.
-		neededWrappingPaper += lwsheet*2
-		neededWrappingPaper += whsheet*2
-		neededWrappingPaper += hlsheet*2
+		neededWrappingPaper += lwsheet * 2
+		neededWrappingPaper += whsheet * 2
+		neededWrappingPaper += hlsheet * 2
 
 		// Add the slack paper.
 		neededWrappingPaper += slackPaper
@@ -66,11 +67,11 @@ func main() {
 		// Get the smallest combination of ribbon.
 		neededFeetOfRibbonForThisPackage := (packageDimensionsInts[0] + packageDimensionsInts[0] + packageDimensionsInts[1] + packageDimensionsInts[1])
 
-		if ((packageDimensionsInts[1] + packageDimensionsInts[1] + packageDimensionsInts[2] + packageDimensionsInts[2]) < neededFeetOfRibbonForThisPackage) {
+		if (packageDimensionsInts[1] + packageDimensionsInts[1] + packageDimensionsInts[2] + packageDimensionsInts[2]) < neededFeetOfRibbonForThisPackage {
 			neededFeetOfRibbonForThisPackage = (packageDimensionsInts[1] + packageDimensionsInts[1] + packageDimensionsInts[2] + packageDimensionsInts[2])
 		}
 
-		if ((packageDimensionsInts[0] + packageDimensionsInts[0] + packageDimensionsInts[2] + packageDimensionsInts[2]) < neededFeetOfRibbonForThisPackage) {
+		if (packageDimensionsInts[0] + packageDimensionsInts[0] + packageDimensionsInts[2] + packageDimensionsInts[2]) < neededFeetOfRibbonForThisPackage {
 			neededFeetOfRibbonForThisPackage = (packageDimensionsInts[0] + packageDimensionsInts[0] + packageDimensionsInts[2] + packageDimensionsInts[2])
 		}
 

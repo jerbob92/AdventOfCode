@@ -1,7 +1,8 @@
 package main
+
 import (
-	"log"
 	"io/ioutil"
+	"log"
 )
 
 func main() {

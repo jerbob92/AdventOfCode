@@ -1,7 +1,8 @@
 package main
+
 import (
-	"log"
 	"io/ioutil"
+	"log"
 )
 
 func main() {
@@ -22,41 +23,41 @@ func main() {
 	// Make sure we have a map here.
 	// Deliver a package at the first house.
 	housesGrid[xIndex] = map[int]int{}
-	housesGrid[xIndex][yIndex]++;
-	amountOfHouses++;
+	housesGrid[xIndex][yIndex]++
+	amountOfHouses++
 
 	for _, char := range input {
 		// Char 94 == ^
 		// Char 118 == v
 		// Char 60 == <
 		// Char 62 == >
-		switch(char) {
+		switch char {
 		case 94:
 			yIndex++
-			break;
+			break
 		case 118:
 			yIndex--
-			break;
+			break
 		case 60:
 			xIndex--
-			break;
+			break
 		case 62:
 			xIndex++
-			break;
+			break
 		}
 
 		// If x doesn't exist yet, create a new map.
-		if (housesGrid[xIndex] == nil) {
+		if housesGrid[xIndex] == nil {
 			housesGrid[xIndex] = map[int]int{}
 		}
 
 		// If y doesn't exist yet, we found a new house.
-		if (housesGrid[xIndex][yIndex] == 0) {
-			amountOfHouses++;
+		if housesGrid[xIndex][yIndex] == 0 {
+			amountOfHouses++
 		}
 
 		// Deliver a package at the current house
-		housesGrid[xIndex][yIndex]++;
+		housesGrid[xIndex][yIndex]++
 	}
 
 	log.Printf("Part 1: amount of houses we visited: %d", amountOfHouses)

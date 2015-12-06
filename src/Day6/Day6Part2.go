@@ -1,10 +1,11 @@
 package main
+
 import (
-	"os"
 	"bufio"
 	"log"
-	"strings"
+	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 		words := strings.Split(line, " ")
 
 		// The toggle instruction.
-		if (words[0] == "toggle") {
+		if words[0] == "toggle" {
 
 			// Split the correct words, toggle x,y through x,y
 			start := strings.Split(words[1], ",")
@@ -53,7 +54,7 @@ func main() {
 			for x, ymap := range instructionLightGrid {
 				// Add  2 to the brightness for toggles.
 				for y, _ := range ymap {
-					lightGrid[x][y] += 2;
+					lightGrid[x][y] += 2
 				}
 			}
 		} else {
@@ -77,7 +78,7 @@ func main() {
 						lightGrid[x][y]++
 					} else {
 						lightGrid[x][y]--
-						if (lightGrid[x][y] < 0) {
+						if lightGrid[x][y] < 0 {
 							lightGrid[x][y] = 0
 						}
 					}
@@ -97,7 +98,6 @@ func main() {
 
 	log.Printf("Total brightness of all lights combined %d", totalLigthBrightness)
 }
-
 
 func getStartAndEndCoords(start []string, end []string) (int, int, int, int) {
 	xStart, _ := strconv.Atoi(start[0])

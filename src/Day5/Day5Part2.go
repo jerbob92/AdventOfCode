@@ -1,8 +1,9 @@
 package main
+
 import (
-	"os"
 	"bufio"
 	"log"
+	"os"
 )
 
 func main() {
@@ -33,11 +34,11 @@ func main() {
 			if lastChar != "" {
 
 				// Check for overlapping patterns
-				if (repeatingCharMapPosition[lastChar + string(char)] == 0 || repeatingCharMapPosition[lastChar + string(char)] != (i -1)) {
-					repeatingCharMapPosition[lastChar + string(char)] = i
-					repeatingCharMap[lastChar + string(char)]++
+				if repeatingCharMapPosition[lastChar+string(char)] == 0 || repeatingCharMapPosition[lastChar+string(char)] != (i-1) {
+					repeatingCharMapPosition[lastChar+string(char)] = i
+					repeatingCharMap[lastChar+string(char)]++
 
-					if repeatingCharMap[lastChar + string(char)] > 1 {
+					if repeatingCharMap[lastChar+string(char)] > 1 {
 						gotRepeatedPair = true
 						break
 					}
@@ -49,7 +50,7 @@ func main() {
 		}
 
 		// Bail out if we didn't get a repeating pair.
-		if (!gotRepeatedPair) {
+		if !gotRepeatedPair {
 			continue
 		}
 
@@ -67,7 +68,7 @@ func main() {
 		}
 
 		// Bail out if we dind't get a repeating char.
-		if (!gotRepeatingChar) {
+		if !gotRepeatingChar {
 			continue
 		}
 

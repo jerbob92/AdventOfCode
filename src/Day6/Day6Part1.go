@@ -1,10 +1,11 @@
 package main
+
 import (
-	"os"
 	"bufio"
 	"log"
-	"strings"
+	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 		words := strings.Split(line, " ")
 
 		// The toggle instruction.
-		if (words[0] == "toggle") {
+		if words[0] == "toggle" {
 
 			// Split the correct words, toggle x,y through x,y
 			start := strings.Split(words[1], ",")
@@ -49,7 +50,6 @@ func main() {
 			xStart, yStart, xEnd, yEnd := getStartAndEndCoords(start, end)
 
 			instructionLightGrid := getLightsInGrid(xStart, yStart, xEnd, yEnd)
-
 
 			for x, ymap := range instructionLightGrid {
 				for y, _ := range ymap {
@@ -104,7 +104,6 @@ func getStartAndEndCoords(start []string, end []string) (int, int, int, int) {
 	yEnd, _ := strconv.Atoi(end[1])
 	return xStart, yStart, xEnd, yEnd
 }
-
 
 func getLightsInGrid(xStart int, yStart int, xEnd int, yEnd int) map[int]map[int]bool {
 
