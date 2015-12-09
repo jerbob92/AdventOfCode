@@ -72,8 +72,8 @@ func findLocationEnd(locationMap map[string]map[string]int, currentRoute []strin
 	} else {
 
 		// Loop through all possible connections
-		maxDistance := 0;
-		maxRoute := "";
+		minDistance := 0;
+		minRoute := "";
 		for key, distanceBetween := range locationMap[currentLocation] {
 
 			// Check if the current destination isn't already visited in this loop, we only need to visit every place once.
@@ -87,16 +87,16 @@ func findLocationEnd(locationMap map[string]map[string]int, currentRoute []strin
 
 				// Add the current destination to the total destional.
 				newCurrentDistance := currentDistance + distanceBetween
-				newMaxRoute, newCurrentDistance := findLocationEnd(locationMap, newCurrentRoute, key, newLength, newCurrentDistance)
+				newMinRoute, newCurrentDistance := findLocationEnd(locationMap, newCurrentRoute, key, newLength, newCurrentDistance)
 
 				// Check if this is the first combination or this one is faster than the known routes.
-				if (maxDistance == 0 || newCurrentDistance < maxDistance) {
-					maxDistance = newCurrentDistance;
-					maxRoute = newMaxRoute
+				if (minDistance == 0 || newCurrentDistance < minDistance) {
+					minDistance = newCurrentDistance;
+					minRoute = newMinRoute
 				}
 			}
 		}
-		return maxRoute, maxDistance;
+		return minRoute, minDistance;
 	}
 }
 

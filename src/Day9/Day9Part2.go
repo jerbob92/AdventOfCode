@@ -44,8 +44,8 @@ func main() {
 		locationMap[parts[2]][parts[0]] = distance
 	}
 
-	minRouteDistance := 0;
-	minRoute := ""
+	maxRouteDistance := 0;
+	maxRoute := ""
 
 	// Loop through all the locations to find the best route.
 	for key, _ := range locationMap {
@@ -55,13 +55,13 @@ func main() {
 		route, newMinDistance := findLocationEnd(locationMap, currentRoute, key, 1, 0)
 
 		// Is this the first or longer than any found?
-		if (minRouteDistance == 0 || newMinDistance > minRouteDistance) {
-			minRouteDistance = newMinDistance
-			minRoute = route
+		if (maxRouteDistance == 0 || newMinDistance > maxRouteDistance) {
+			maxRouteDistance = newMinDistance
+			maxRoute = route
 		}
 	}
 
-	log.Printf("The longest route was %d using route %s.", minRouteDistance, minRoute);
+	log.Printf("The longest route was %d using route %s.", maxRouteDistance, maxRoute);
 }
 
 func findLocationEnd(locationMap map[string]map[string]int, currentRoute []string, currentLocation string, currentLength int, currentDistance int) (string, int) {
