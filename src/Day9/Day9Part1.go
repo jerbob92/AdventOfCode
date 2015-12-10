@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"log"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
-type Location struct  {
+type Location struct {
 	Destinations map[string]int
 }
 
@@ -26,16 +26,16 @@ func main() {
 	// We save every destination with it's destinations distances.
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		line :=  scanner.Text()
+		line := scanner.Text()
 		parts := strings.Split(line, " ")
 
 		distance, _ := strconv.Atoi(parts[4])
 
 		// Make sure we have the maps.
-		if (locationMap[parts[0]] == nil) {
+		if locationMap[parts[0]] == nil {
 			locationMap[parts[0]] = map[string]int{}
 		}
-		if (locationMap[parts[2]] == nil) {
+		if locationMap[parts[2]] == nil {
 			locationMap[parts[2]] = map[string]int{}
 		}
 
@@ -44,7 +44,7 @@ func main() {
 		locationMap[parts[2]][parts[0]] = distance
 	}
 
-	minRouteDistance := 0;
+	minRouteDistance := 0
 	minRoute := ""
 
 	// Loop through all the locations to find the best route.
@@ -55,55 +55,55 @@ func main() {
 		route, newMinDistance := findLocationEnd(locationMap, currentRoute, key, 1, 0)
 
 		// Is this the first or shorter than any found?
-		if (minRouteDistance == 0 || newMinDistance < minRouteDistance) {
+		if minRouteDistance == 0 || newMinDistance < minRouteDistance {
 			minRouteDistance = newMinDistance
 			minRoute = route
 		}
 	}
 
-	log.Printf("The shortest route was %d using route %s.", minRouteDistance, minRoute);
+	log.Printf("Part 1: The shortest route was %d using route %s.", minRouteDistance, minRoute)
 }
 
 func findLocationEnd(locationMap map[string]map[string]int, currentRoute []string, currentLocation string, currentLength int, currentDistance int) (string, int) {
-	if (currentLength == len(locationMap)) {
+	if currentLength == len(locationMap) {
 
 		// Bail out when we went to every city.
-		return strings.Join(currentRoute, " -> "), currentDistance;
+		return strings.Join(currentRoute, " -> "), currentDistance
 	} else {
 
 		// Loop through all possible connections
-		minDistance := 0;
-		minRoute := "";
+		minDistance := 0
+		minRoute := ""
 		for key, distanceBetween := range locationMap[currentLocation] {
 
 			// Check if the current destination isn't already visited in this loop, we only need to visit every place once.
-			if (!inCurrentRoute(currentRoute, key)) {
+			if !inCurrentRoute(currentRoute, key) {
 
 				// Combine the current destination into the route.
 				newCurrentRoute := append(currentRoute, key)
 
 				// Remember we are one destination further.
-				newLength := currentLength + 1;
+				newLength := currentLength + 1
 
 				// Add the current destination to the total destional.
 				newCurrentDistance := currentDistance + distanceBetween
 				newMinRoute, newCurrentDistance := findLocationEnd(locationMap, newCurrentRoute, key, newLength, newCurrentDistance)
 
 				// Check if this is the first combination or this one is faster than the known routes.
-				if (minDistance == 0 || newCurrentDistance < minDistance) {
-					minDistance = newCurrentDistance;
+				if minDistance == 0 || newCurrentDistance < minDistance {
+					minDistance = newCurrentDistance
 					minRoute = newMinRoute
 				}
 			}
 		}
-		return minRoute, minDistance;
+		return minRoute, minDistance
 	}
 }
 
 // Helper to see if the matches destination is in our route.
 func inCurrentRoute(currentRoute []string, currentLocation string) bool {
 	for _, location := range currentRoute {
-		if (location == currentLocation) {
+		if location == currentLocation {
 			return true
 		}
 	}

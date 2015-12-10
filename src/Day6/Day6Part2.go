@@ -93,7 +93,7 @@ func main() {
 		}
 	}
 
-	log.Printf("Total brightness of all lights combined %d", totalLigthBrightness)
+	log.Printf("Part 2: Total brightness of all lights combined %d", totalLigthBrightness)
 }
 
 func getStartAndEndCoords(start []string, end []string) (int, int, int, int) {

@@ -62,5 +62,5 @@ func main() {
 		niceStrings++
 	}
 
-	log.Printf("We got %d nice strings.", niceStrings)
+	log.Printf("Part 1: We got %d nice strings.", niceStrings)
 }

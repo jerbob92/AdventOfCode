@@ -29,6 +29,6 @@ func main() {
 	}
 
 	if lowestNumber > -1 {
-		log.Printf("The lowest number that results in a hash that starts with %s with key %s + i is where i = %d", prefix, input, lowestNumber)
+		log.Printf("Part 1: The lowest number that results in a hash that starts with %s with key %s + i is where i = %d", prefix, input, lowestNumber)
 	}
 }

@@ -93,7 +93,7 @@ func main() {
 		}
 	}
 
-	log.Printf("There are %d lights lit", litLights)
+	log.Printf("Part 1: There are %d lights lit", litLights)
 }
 
 func getStartAndEndCoords(start []string, end []string) (int, int, int, int) {

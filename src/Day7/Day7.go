@@ -4,10 +4,9 @@ import (
 	"bufio"
 	"log"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
-
 
 func main() {
 	portMap := map[string]uint16{}
@@ -48,30 +47,30 @@ func solve(portMap map[string]uint16, portVisited map[string]bool, requestedWire
 
 			// Bail out if we already been here.
 			if portVisited[destination] {
-				continue;
+				continue
 			}
 
 			// Split on the operation so we know what to do.
 			operations := strings.Split(operation, " ")
 
 			// Operation with length 1 is a number or a direct port,
-			if (len(operations) == 1) {
+			if len(operations) == 1 {
 				if number, err := strconv.Atoi(operations[0]); err == nil {
 
 					// Directly apply if the input is a number.
 					portMap[destination] = uint16(number)
 					portVisited[destination] = true
 				} else {
-					if (portVisited[operations[0]]) {
+					if portVisited[operations[0]] {
 						portMap[destination] = portMap[operations[0]]
 						portVisited[destination] = true
 					} else {
 
 						// Bail out if we don't have our source yet.
-						continue;
+						continue
 					}
 				}
-			} else if (len(operations) == 2) {
+			} else if len(operations) == 2 {
 				// Operations with length 2 are always NOT operations.
 				if number, err := strconv.Atoi(operations[1]); err == nil {
 
@@ -79,13 +78,13 @@ func solve(portMap map[string]uint16, portVisited map[string]bool, requestedWire
 					portMap[destination] = ^uint16(number)
 					portVisited[destination] = true
 				} else {
-					if (portVisited[operations[1]]) {
+					if portVisited[operations[1]] {
 						portMap[destination] = ^portMap[operations[1]]
 						portVisited[destination] = true
 					} else {
 
 						// Bail out if we don't have our source yet.
-						continue;
+						continue
 					}
 				}
 			} else {
@@ -99,7 +98,7 @@ func solve(portMap map[string]uint16, portVisited map[string]bool, requestedWire
 					leftValue = uint16(leftNumber)
 					haveLeft = true
 				} else {
-					if (portVisited[operations[0]]) {
+					if portVisited[operations[0]] {
 						leftValue = portMap[operations[0]]
 						haveLeft = true
 					}
@@ -110,28 +109,28 @@ func solve(portMap map[string]uint16, portVisited map[string]bool, requestedWire
 					rightValue = uint16(rightNumber)
 					haveRight = true
 				} else {
-					if (portVisited[operations[2]]) {
+					if portVisited[operations[2]] {
 						rightValue = portMap[operations[2]]
 						haveRight = true
 					}
 				}
 
-				if (haveLeft && haveRight) {
+				if haveLeft && haveRight {
 
 					// Apply the operation that we need to do.
-					switch(operations[1]) {
+					switch operations[1] {
 					case "AND":
-						portMap[destination] = leftValue&rightValue
-						break;
+						portMap[destination] = leftValue & rightValue
+						break
 					case "OR":
-						portMap[destination] = leftValue|rightValue
-						break;
+						portMap[destination] = leftValue | rightValue
+						break
 					case "LSHIFT":
-						portMap[destination] = leftValue<<uint16(rightValue)
-						break;
+						portMap[destination] = leftValue << uint16(rightValue)
+						break
 					case "RSHIFT":
-						portMap[destination] = leftValue>>uint16(rightValue)
-						break;
+						portMap[destination] = leftValue >> uint16(rightValue)
+						break
 					}
 					portVisited[destination] = true
 				} else {
